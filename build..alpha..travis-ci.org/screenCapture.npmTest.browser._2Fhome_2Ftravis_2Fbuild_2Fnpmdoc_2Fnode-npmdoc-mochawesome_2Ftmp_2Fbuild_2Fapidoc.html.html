@@ -1,0 +1,470 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/adamgruber/mochawesome#readme">mochawesome (v2.0.4)</a>
+</h1>
+<h4>A Gorgeous HTML/CSS Reporter for Mocha.js</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mochawesome">module mochawesome</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mochawesome.</span>utils</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mochawesome.utils">module mochawesome.utils</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.cleanCode">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>cleanCode
+            <span class="apidocSignatureSpan">(str)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.cleanSuite">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>cleanSuite
+            <span class="apidocSignatureSpan">(suite, totalTestsRegistered)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.cleanTest">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>cleanTest
+            <span class="apidocSignatureSpan">(test)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.getPercentClass">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>getPercentClass
+            <span class="apidocSignatureSpan">(pct)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.log">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>log
+            <span class="apidocSignatureSpan">(msg, level, config)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.removeAllPropsFromObjExcept">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>removeAllPropsFromObjExcept
+            <span class="apidocSignatureSpan">(obj, propsToKeep)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.saveFile">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>saveFile
+            <span class="apidocSignatureSpan">(filename, data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mochawesome.utils.traverseSuites">
+            function <span class="apidocSignatureSpan">mochawesome.utils.</span>traverseSuites
+            <span class="apidocSignatureSpan">(suite, totalTestsRegistered)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mochawesome" id="apidoc.module.mochawesome">module mochawesome</a></h1>
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mochawesome.utils" id="apidoc.module.mochawesome.utils">module mochawesome.utils</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.cleanCode" id="apidoc.element.mochawesome.utils.cleanCode">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>cleanCode
+        <span class="apidocSignatureSpan">(str)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function cleanCode(str) {
+  str = str
+    .replace(/\r\n?|[\n\u2028\u2029]/g, '\n').replace(/^\uFEFF/, '')
+    .replace(/^function\s*\(.*\)\s*{|\(.*\)\s*=&gt;\s*{?/, '')
+    .replace(/\s*\}$/, '');
+
+  const spaces = str.match(/^\n?( *)/)[1].length;
+  const tabs = str.match(/^\n?(\t*)/)[1].length;
+<span class="apidocCodeCommentSpan">  /* istanbul ignore next */
+</span>  const re = new RegExp(`^\n?${tabs ? '\t' : ' '}{${tabs || spaces}}`, 'gm');
+
+  str = str.replace(re, '');
+  str = str.replace(/^\s+|\s+$/g, '');
+  return str;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.cleanSuite" id="apidoc.element.mochawesome.utils.cleanSuite">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>cleanSuite
+        <span class="apidocSignatureSpan">(suite, totalTestsRegistered)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function cleanSuite(suite, totalTestsRegistered) {
+  // console.log(stringify(suite));
+  suite.uuid = uuid.v4();
+
+  const cleanTests = _.map(suite.tests, cleanTest);
+  const passingTests = _.filter(cleanTests, { state: 'passed' });
+  const failingTests = _.filter(cleanTests, { state: 'failed' });
+  const pendingTests = _.filter(cleanTests, { pending: true });
+  const skippedTests = _.filter(cleanTests, { skipped: true });
+  let duration = 0;
+
+  _.each(cleanTests, test =&gt; {
+    duration += test.duration;
+  });
+
+  totalTestsRegistered.total += suite.tests.length;
+
+  suite.tests = cleanTests;
+  suite.fullFile = suite.file || '';
+  suite.file = suite.file ? suite.file.replace(process.cwd(), '') : '';
+  suite.passes = passingTests;
+  suite.failures = failingTests;
+  suite.pending = pendingTests;
+  suite.skipped = skippedTests;
+  suite.hasTests = suite.tests.length &gt; 0;
+  suite.hasSuites = suite.suites.length &gt; 0;
+  suite.totalTests = suite.tests.length;
+  suite.totalPasses = passingTests.length;
+  suite.totalFailures = failingTests.length;
+  suite.totalPending = pendingTests.length;
+  suite.totalSkipped = skippedTests.length;
+  suite.hasPasses = passingTests.length &gt; 0;
+  suite.hasFailures = failingTests.length &gt; 0;
+  suite.hasPending = pendingTests.length &gt; 0;
+  suite.hasSkipped = suite.skipped.length &gt; 0;
+  suite.duration = duration;
+  suite.rootEmpty = suite.root &amp;&amp; suite.totalTests === 0;
+
+  removeAllPropsFromObjExcept(suite, [
+    'title',
+    'fullFile',
+    'file',
+    'tests',
+    'suites',
+    'passes',
+    'failures',
+    'pending',
+    'skipped',
+    'hasTests',
+    'hasSuites',
+    'totalTests',
+    'totalPasses',
+    'totalFailures',
+    'totalPending',
+    'totalSkipped',
+    'hasPasses',
+    'hasFailures',
+    'hasPending',
+    'hasSkipped',
+    'root',
+    'uuid',
+    'duration',
+    'rootEmpty',
+    '_timeout'
+  ]);
+  // console.log(suite.suites[0].tests);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.cleanTest" id="apidoc.element.mochawesome.utils.cleanTest">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>cleanTest
+        <span class="apidocSignatureSpan">(test)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function cleanTest(test) {
+<span class="apidocCodeCommentSpan">  /**
+   * Check that a / b have the same type.
+   */
+</span>  function sameType(a, b) {
+    const objToString = Object.prototype.toString;
+    return objToString.call(a) === objToString.call(b);
+  }
+
+  /* istanbul ignore next: test.fn exists prior to mocha 2.4.0 */
+  let code = test.fn ? test.fn.toString() : test.body;
+  const err = test.err || {};
+  const { actual, expected, showDiff, stack } = err;
+
+  if (code) {
+    code = cleanCode(code);
+  }
+
+  if (stack) {
+    err.estack = err.stack;
+  }
+
+  // Create diff for the error
+  if (showDiff !== false &amp;&amp; sameType(actual, expected) &amp;&amp; expected !== undefined) {
+    /* istanbul ignore if */
+    if (!(_.isString(actual) &amp;&amp; _.isString(expected))) {
+      err.actual = mochaUtils.stringify(actual);
+      err.expected = mochaUtils.stringify(expected);
+    }
+    err.diff = diff
+      .createPatch('string', err.actual, err.expected)
+      .split('\n')
+      .splice(4)
+      .map(line =&gt; {
+        if (line.match(/@@/)) {
+          return null;
+        }
+        if (line.match(/\\ No newline/)) {
+          return null;
+        }
+        return line.replace(/^(-|\+)/, '$1 ');
+      })
+      .filter(line =&gt; typeof line !== 'undefined' &amp;&amp; line !== null)
+      .join('\n');
+  }
+
+  const cleaned = {
+    title: test.title,
+    fullTitle: _.isFunction(test.fullTitle) ? test.fullTitle() : /* istanbul ignore next */test.title,
+    timedOut: test.timedOut,
+    duration: test.duration || 0,
+    state: test.state,
+    speed: test.speed,
+    pass: test.state === 'passed',
+    fail: test.state === 'failed',
+    pending: test.pending,
+    context: stringify(test.context, null, 2),
+    code,
+    err,
+    isRoot: test.parent &amp;&amp; test.parent.root,
+    uuid: test.uuid || /* istanbul ignore next: default */uuid.v4(),
+    parentUUID: test.parent &amp;&amp; test.parent.uuid
+  };
+
+  cleaned.skipped = (!cleaned.pass &amp;&amp; !cleaned.fail &amp;&amp; !cleaned.pending);
+
+  return cleaned;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.getPercentClass" id="apidoc.element.mochawesome.utils.getPercentClass">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>getPercentClass
+        <span class="apidocSignatureSpan">(pct)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getPercentClass(pct) {
+  if (pct &lt;= 50) {
+    return 'danger';
+  } else if (pct &gt; 50 &amp;&amp; pct &lt; 80) {
+    return 'warning';
+  } else {
+    return 'success';
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.log" id="apidoc.element.mochawesome.utils.log">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>log
+        <span class="apidocSignatureSpan">(msg, level, config)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function log(msg, level, config) {
+  // Don't log messages in quiet mode
+  if (config &amp;&amp; config.quiet) return;
+  const logMethod = console[level] || console.log;
+  let out = msg;
+  if (typeof msg === 'object') {
+    out = stringify(msg, null, 2);
+  }
+  logMethod(`[${chalk.gray('mochawesome')}] ${out}\n`);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * the template and remove unused properties.
+ *
+ * @param {Object} suite
+ * @param {Object} totalTestsRegistered
+ * @param {Integer} totalTestsRegistered.total
+ */
+function cleanSuite(suite, totalTestsRegistered) {
+// console.<span class="apidocCodeKeywordSpan">log</span>(stringify(suite));
+suite.uuid = uuid.v4();
+
+const cleanTests = _.map(suite.tests, cleanTest);
+const passingTests = _.filter(cleanTests, { state: 'passed' });
+const failingTests = _.filter(cleanTests, { state: 'failed' });
+const pendingTests = _.filter(cleanTests, { pending: true });
+const skippedTests = _.filter(cleanTests, { skipped: true });
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.removeAllPropsFromObjExcept" id="apidoc.element.mochawesome.utils.removeAllPropsFromObjExcept">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>removeAllPropsFromObjExcept
+        <span class="apidocSignatureSpan">(obj, propsToKeep)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function removeAllPropsFromObjExcept(obj, propsToKeep) {
+  _.forOwn(obj, (val, prop) =&gt; {
+    if (propsToKeep.indexOf(prop) === -1) {
+      delete obj[prop];
+    }
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.saveFile" id="apidoc.element.mochawesome.utils.saveFile">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>saveFile
+        <span class="apidocSignatureSpan">(filename, data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function saveFile(filename, data) {
+  return new Promise((resolve, reject) =&gt; {
+    fs.outputFile(filename, data, err =&gt; err === null ? resolve(true) : reject(err));
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mochawesome.utils.traverseSuites" id="apidoc.element.mochawesome.utils.traverseSuites">
+        function <span class="apidocSignatureSpan">mochawesome.utils.</span>traverseSuites
+        <span class="apidocSignatureSpan">(suite, totalTestsRegistered)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function traverseSuites(suite, totalTestsRegistered) {
+  const queue = [];
+  let next = suite;
+  while (next) {
+    if (next.root) {
+      cleanSuite(next, totalTestsRegistered);
+    }
+    if (next.suites.length) {
+      _.each(next.suites, (nextSuite, i) =&gt; {
+        cleanSuite(nextSuite, totalTestsRegistered);
+        queue.push(nextSuite);
+      });
+    }
+    next = queue.shift();
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
