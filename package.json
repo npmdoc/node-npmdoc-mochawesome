@@ -1,17 +1,40 @@
 {
-    "buildNpmdoc":"mochawesome",
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "buildNpmdoc": "mochawesome",
+    "description": "api documentation for [mochawesome (v2.0.4)](https://github.com/adamgruber/mochawesome#readme) [![npm package](https://img.shields.io/npm/v/npmdoc-mochawesome.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-mochawesome) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-mochawesome.svg)](https://travis-ci.org/npmdoc/node-npmdoc-mochawesome)",
     "devDependencies": {
-        "mochawesome": "*",
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "mochawesome": "*",
         "utility2": "kaizhu256/node-utility2#alpha"
     },
-    "name":"npmdoc-mochawesome",
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmdoc/node-npmdoc-mochawesome",
+    "keywords": [
+        "documentation",
+        "mochawesome"
+    ],
+    "license": "MIT",
+    "main": "lib.npmdoc_mochawesome.js",
+    "name": "npmdoc-mochawesome",
+    "nameAlias": "npmdoc_mochawesome",
+    "nameOriginal": "npmdoc-mochawesome",
+    "os": [
+        "darwin",
+        "linux"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/npmdoc/node-npmdoc-mochawesome"
     },
     "scripts": {
-        "build-ci": "utility2 shReadmeTest build_ci.sh"
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "(set -e; npm install \"kaizhu256/node-utility2#alpha\"; utility2 shDeployHeroku)",
+        "postinstall": "if [ -f npm_scripts.sh ]; then ./npm_scripts.sh postinstall; fi",
+        "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
     "version": "0.0.1"
 }
