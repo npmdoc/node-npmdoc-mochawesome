@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/adamgruber/mochawesome#readme"
-
-    >mochawesome (v2.0.5)</a>
+    <a href="https://github.com/adamgruber/mochawesome#readme">mochawesome (v2.0.5)</a>
 </h1>
 <h4>A Gorgeous HTML/CSS Reporter for Mocha.js</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.mochawesome">module mochawesome</a><ol>
 
@@ -98,7 +91,7 @@
   totalTestsRegistered.total = 0;
 
   // Create/Save necessary report dirs/files
-  var reporterOpts = options &#x26;&#x26; options.reporterOptions || {};
+  var reporterOpts = options &amp;&amp; options.reporterOptions || {};
   this.config = conf(reporterOpts);
 
   // Call the Base mocha reporter
@@ -114,33 +107,33 @@
   var endCalled = false;
 
   // Add a unique identifier to each test
-  runner.on(&#x27;test&#x27;, function (test) {
+  runner.on('test', function (test) {
     return test.uuid = uuid.v4();
   });
 
   // Add test to array of all tests
-  runner.on(&#x27;test end&#x27;, function (test) {
+  runner.on('test end', function (test) {
     return allTests.push(test);
   });
 
   // Add pending test to array of pending tests
-  runner.on(&#x27;pending&#x27;, function (test) {
+  runner.on('pending', function (test) {
     test.uuid = uuid.v4();
     allPending.push(test);
   });
 
   // Add passing test to array of passing tests
-  runner.on(&#x27;pass&#x27;, function (test) {
+  runner.on('pass', function (test) {
     return allPasses.push(test);
   });
 
   // Add failed test to array of failed tests
-  runner.on(&#x27;fail&#x27;, function (test) {
+  runner.on('fail', function (test) {
     return allFailures.push(test);
   });
 
   // Process the full suite
-  runner.on(&#x27;end&#x27;, function () {
+  runner.on('end', function () {
     try {
 <span class="apidocCodeCommentSpan">      /* istanbul ignore else */
 </span>      if (!endCalled) {
@@ -177,9 +170,9 @@
         obj.stats.passPercent = passPercentage;
         obj.stats.pendingPercent = pendingPercentage;
         obj.stats.other = passes + failures + pending - tests;
-        obj.stats.hasOther = obj.stats.other &#x3e; 0;
+        obj.stats.hasOther = obj.stats.other &gt; 0;
         obj.stats.skipped = testsRegistered - tests;
-        obj.stats.hasSkipped = obj.stats.skipped &#x3e; 0;
+        obj.stats.hasSkipped = obj.stats.skipped &gt; 0;
         obj.stats.failures -= obj.stats.other;
         obj.stats.passPercentClass = getPercentClass(passPercentage);
         obj.stats.pendingPercentClass = getPercentClass(pendingPercentage);
@@ -189,9 +182,9 @@
       }
     } catch (e) {
       // required because thrown errors are not handled directly in the
-      // event emitter pattern and mocha does not have an &#x22;on error&#x22;
+      // event emitter pattern and mocha does not have an "on error"
       /* istanbul ignore next */
-      log(&#x27;Problem with mochawesome: &#x27; + e.stack, &#x27;error&#x27;);
+      log('Problem with mochawesome: ' + e.stack, 'error');
     }
   });
 }</pre></li>
@@ -207,3 +200,4 @@
     ]
 </div>
 </div>
+</body></html>
